@@ -1,10 +1,13 @@
 <?php
 
+use yii\rest\UrlRule;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'timeZone' => 'Asia/Taipei',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -22,6 +25,17 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'formatter' => [
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => false,
+            'showScriptName' => false,
+            'rules' => [
+                ['class' => UrlRule::class, 'controller' => 'ping'],
+            ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
